@@ -63,22 +63,22 @@ class Calculator {
 
     const leftNum = arrayToNumber(this.left);
     const rightNum = arrayToNumber(this.right);
-
+    let result = this.result;
     switch (this.operator) {
       case PLUS:
-        this.result += add(leftNum, rightNum);
+        result += add(leftNum, rightNum);
         break;
       case MINUS:
-        this.result += minus(leftNum, rightNum);
+        result += minus(leftNum, rightNum);
         break;
       case MULTIPLY:
-        this.result += multiply(leftNum, rightNum);
+        result += multiply(leftNum, rightNum);
         break;
       case DIVIDE:
-        this.result += divide(leftNum, rightNum);
+        result += divide(leftNum, rightNum);
         break;
     }
-
+    this.result = Math.floor(result);
     return this.result;
   }
 
