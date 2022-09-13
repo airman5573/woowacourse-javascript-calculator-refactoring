@@ -1,12 +1,6 @@
 import "./css/index.css";
 import Calculator, { isEnter } from "./Calculator";
-
-const OPERATOR_SIGN = {
-  plus: "+",
-  minus: "-",
-  multiply: "*",
-  divide: "/",
-};
+import { OPERATOR_SIGN } from "./constants";
 
 const resultTextForScreen = (calculator) => {
   const result = [
