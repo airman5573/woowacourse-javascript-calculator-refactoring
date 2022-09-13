@@ -13,7 +13,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js)$/,
+        test: /\.(ts)$/,
         exclude: /node_modules/,
         use: ["babel-loader"],
       },
@@ -35,6 +35,6 @@ module.exports = {
     new CleanWebpackPlugin(),
   ],
   resolve: {
-    extensions: [".js"],
+    extensions: [".ts"],
   },
 };

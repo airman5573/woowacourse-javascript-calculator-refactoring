@@ -5,9 +5,9 @@ const PLUS = "plus";
 const MINUS = "minus";
 const MULTIPLY = "multiply";
 const DIVIDE = "divide";
-export const OPERATORS = [PLUS, MINUS, MULTIPLY, DIVIDE];
-export const ENTER = "enter";
-export const OPERANDS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+export const ENTER = "enter" as const;
+export const OPERATORS = [PLUS, MINUS, MULTIPLY, DIVIDE] as const;
+export const OPERANDS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
 export const COMPUTE_STATUS = {
   SUCCESS: {
     LEFT_INPUT: 201,
@@ -18,37 +18,40 @@ export const COMPUTE_STATUS = {
     CONSECUTIVE_OPERATOR: 401,
   },
 };
+export type Operator = typeof OPERATORS[number];
+export type Operand = typeof OPERANDS[number];
+export type ValueType = Operator | Operand | typeof ENTER;
 
-export const add = (a, b) => {
+export const add = (a: number, b: number): number => {
   return a + b;
 };
-export const minus = (a, b) => {
+export const minus = (a: number, b: number): number => {
   return a - b;
 };
-export const multiply = (a, b) => {
+export const multiply = (a: number, b: number): number => {
   return a * b;
 };
-export const divide = (a, b) => {
+export const divide = (a: number, b: number): number => {
   if (b === 0) {
     throw new Error("0으로 나눌 수 없습니다!");
   }
   return Math.floor(a / b);
 };
-export const isOperator = (val) => {
-  return OPERATORS.includes(val);
+export const isOperator = (val: number | string): val is Operator => {
+  return OPERATORS.findIndex((value) => value === val) > 0;
 };
-export const isOperand = (val) => {
-  return OPERANDS.includes(val);
+export const isOperand = (val: number | string): val is Operand => {
+  return OPERANDS.findIndex((value) => value === val) > 0;
 };
-export const isEnter = (val) => {
+export const isEnter = (val: number | string) => {
   return val === ENTER;
 };
 
 class Calculator {
-  left = [];
-  right = [];
-  operator = null;
-  result = null;
+  left: Array<number> = [];
+  right: Array<number> = [];
+  operator: Operator | null = null;
+  result: number | null = null;
 
   compute() {
     if (this.operator === null) {
@@ -63,7 +66,7 @@ class Calculator {
 
     const leftNum = arrayToNumber(this.left);
     const rightNum = arrayToNumber(this.right);
-    let result = this.result;
+    let result = this.result ?? 0;
     switch (this.operator) {
       case PLUS:
         result += add(leftNum, rightNum);
@@ -82,7 +85,7 @@ class Calculator {
     return this.result;
   }
 
-  input(val) {
+  input(val: ValueType) {
     // error handling
     if (!isOperator(val) && !isOperand(val) && !isEnter(val)) {
       throw new Error(
@@ -126,7 +129,7 @@ class Calculator {
       return;
     }
 
-    if (isOperand(val) && isOperator(this.operator) && this.left.length > 0) {
+    if (isOperand(val) && this.operator !== null && this.left.length > 0) {
       this.right.push(val);
       return;
     }
