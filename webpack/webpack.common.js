@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: join(__dirname, "../src/index.js"),
+  entry: join(__dirname, "../src/index.ts"),
   output: {
     filename: "main.js",
     path: join(__dirname, "../dist"),
@@ -35,6 +35,6 @@ module.exports = {
     new CleanWebpackPlugin(),
   ],
   resolve: {
-    extensions: [".ts"],
+    extensions: [".ts", ".js"],
   },
 };

@@ -8,28 +8,46 @@
   <body>
     <div id="app">
       <div class="calculator">
-        <h1 id="total">0</h1>
-        <div class="digits flex">
-          <button class="digit">9</button>
-          <button class="digit">8</button>
-          <button class="digit">7</button>
-          <button class="digit">6</button>
-          <button class="digit">5</button>
-          <button class="digit">4</button>
-          <button class="digit">3</button>
-          <button class="digit">2</button>
-          <button class="digit">1</button>
-          <button class="digit">0</button>
+        <h1 id="total" data-testid="total">0</h1>
+        <div class="digits flex" data-testid="digits">
+          <button class="digit" data-testid="digit9">9</button>
+          <button class="digit" data-testid="digit8">8</button>
+          <button class="digit" data-testid="digit7">7</button>
+          <button class="digit" data-testid="digit6">6</button>
+          <button class="digit" data-testid="digit5">5</button>
+          <button class="digit" data-testid="digit4">4</button>
+          <button class="digit" data-testid="digit3">3</button>
+          <button class="digit" data-testid="digit2">2</button>
+          <button class="digit" data-testid="digit1">1</button>
+          <button class="digit" data-testid="digit0">0</button>
         </div>
         <div class="modifiers subgrid">
-          <button class="modifier">AC</button>
+          <button class="modifier" data-testid="modifier">AC</button>
         </div>
-        <div class="operations subgrid">
-          <button class="operation" data-operation="divide">/</button>
-          <button class="operation" data-operation="multiply">X</button>
-          <button class="operation" data-operation="minus">-</button>
-          <button class="operation" data-operation="plus">+</button>
-          <button class="operation" data-operation="enter">=</button>
+        <div class="operations subgrid" data-testid="operations">
+          <button
+            class="operation"
+            data-operation="divide"
+            data-testid="divide"
+          >
+            /
+          </button>
+          <button
+            class="operation"
+            data-operation="multiply"
+            data-testid="multiply"
+          >
+            X
+          </button>
+          <button class="operation" data-operation="minus" data-testid="minus">
+            -
+          </button>
+          <button class="operation" data-operation="plus" data-testid="plus">
+            +
+          </button>
+          <button class="operation" data-operation="enter" data-testid="enter">
+            =
+          </button>
         </div>
       </div>
     </div>

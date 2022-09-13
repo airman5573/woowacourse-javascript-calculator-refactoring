@@ -1,5 +1,5 @@
-import arrayToNumber from "./utils/arrayToNumber.js";
-import numberToArray from "./utils/numberToArray.js";
+import arrayToNumber from "./utils/arrayToNumber";
+import numberToArray from "./utils/numberToArray";
 
 const PLUS = "plus";
 const MINUS = "minus";
