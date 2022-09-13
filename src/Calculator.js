@@ -107,6 +107,19 @@ class Calculator {
       throw new Error("피연산자를 먼저 입력해 주세요");
     }
 
+    if (isOperand(val) && this.left.length > 2 && this.operator === null) {
+      throw new Error("세자리 까지만 입력 가능합니다");
+    }
+
+    if (
+      isOperand(val) &&
+      this.left.length > 0 &&
+      this.operator !== null &&
+      this.right.length > 2
+    ) {
+      throw new Error("세자리 까지만 입력 가능합니다");
+    }
+
     // normal process
     if (isOperand(val) && this.operator === null && this.right.length === 0) {
       this.left.push(val);
