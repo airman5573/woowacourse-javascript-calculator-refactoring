@@ -73,8 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (operator === null) {
       throw new Error("data operation이 존재하지 않습니다");
     }
+    alert(operator);
     if (!isOperator(operator)) {
-      throw new Error("올바른 operator가 입니다");
+      throw new Error("올바른 operator를 입력해 주세요");
     }
     try {
       calculator.input(operator);
