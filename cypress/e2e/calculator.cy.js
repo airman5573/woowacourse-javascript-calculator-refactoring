@@ -83,6 +83,7 @@ describe("구현 결과가 요구사항과 일치해야 한다.", () => {
     cy.get(testid`enter`).click();
     cy.get(testid`multiply`).click();
     cy.get(testid`digit-2`).click();
+    cy.get(testid`enter`).click();
 
     cy.get(testid`total`).should("have.text", "60");
   });
