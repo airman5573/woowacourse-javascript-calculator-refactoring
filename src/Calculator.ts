@@ -38,10 +38,10 @@ export const divide = (a: number, b: number): number => {
   return Math.floor(a / b);
 };
 export const isOperator = (val: number | string): val is Operator => {
-  return OPERATORS.findIndex((value) => value === val) > 0;
+  return OPERATORS.findIndex((value) => value === val) > -1;
 };
 export const isOperand = (val: number | string): val is Operand => {
-  return OPERANDS.findIndex((value) => value === val) > 0;
+  return OPERANDS.findIndex((value) => value === val) > -1;
 };
 export const isEnter = (val: number | string) => {
   return val === ENTER;
