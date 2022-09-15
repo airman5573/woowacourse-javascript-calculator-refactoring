@@ -18,9 +18,10 @@ export const COMPUTE_STATUS = {
     CONSECUTIVE_OPERATOR: 401,
   },
 };
+export type Enter = typeof ENTER;
 export type Operator = typeof OPERATORS[number];
 export type Operand = typeof OPERANDS[number];
-export type ValueType = Operator | Operand | typeof ENTER;
+export type ValueType = Operator | Operand | Enter;
 
 export const add = (a: number, b: number): number => {
   return a + b;
@@ -43,7 +44,7 @@ export const isOperator = (val: number | string): val is Operator => {
 export const isOperand = (val: number | string): val is Operand => {
   return OPERANDS.findIndex((value) => value === val) > -1;
 };
-export const isEnter = (val: number | string) => {
+export const isEnter = (val: number | string): val is Enter => {
   return val === ENTER;
 };
 
