@@ -284,4 +284,7 @@ dist
 *.code-workspace
 .vscode
 
+# Cypress
+*.mp4
+
 # End of https://www.toptal.com/developers/gitignore/api/vscode,node,intellij
