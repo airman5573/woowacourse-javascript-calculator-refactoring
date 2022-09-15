@@ -73,8 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (operator === null) {
       throw new Error("data operation이 존재하지 않습니다");
     }
-    alert(operator);
-    if (!isOperator(operator)) {
+    if (!isOperator(operator) && !isEnter(operator)) {
       throw new Error("올바른 operator를 입력해 주세요");
     }
     try {
