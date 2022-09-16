@@ -19,6 +19,10 @@ const resultTextForScreen = (calculator: Calculator) => {
   return result;
 };
 
+const handleError = (error: Error) => {
+  alert(error.message);
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   const calculator = new Calculator();
 
@@ -39,49 +43,43 @@ document.addEventListener("DOMContentLoaded", () => {
     const target = e.target as HTMLButtonElement;
 
     const digit = parseInt(target.innerText, 10);
-    if (!isOperand(digit)) {
-      throw new Error("숫자는 0 ~ 10사이어야 합니다");
-    }
     try {
+      if (!isOperand(digit)) {
+        throw new Error("숫자는 0 ~ 10사이어야 합니다");
+      }
       calculator.input(digit);
       $total.innerHTML = resultTextForScreen(calculator);
-    } catch (e) {
-      console.error(e);
+    } catch (e: any) {
+      handleError(e);
     }
   });
 
-  if (!$modifier) {
-    throw new Error(".modifier 엘리먼트가 존재하지 않습니다");
-  }
   $modifier.addEventListener("click", () => {
     calculator.clear();
     $total.innerHTML = "0";
   });
 
-  if (!$operations) {
-    throw new Error(".operations 엘리먼트가 존재하지 않습니다");
-  }
   $operations.addEventListener("click", (e) => {
     if (!e.target) {
       throw new Error("event target이 존재하지 않습니다");
     }
     const target = e.target as HTMLButtonElement;
     const operator = target.getAttribute("data-operation");
-    if (operator === null) {
-      throw new Error("data operation이 존재하지 않습니다");
-    }
-    if (!isOperator(operator) && !isEnter(operator)) {
-      throw new Error("올바른 operator를 입력해 주세요");
-    }
     try {
+      if (operator === null) {
+        throw new Error("data operation이 존재하지 않습니다");
+      }
+      if (!isOperator(operator) && !isEnter(operator)) {
+        throw new Error("올바른 operator를 입력해 주세요");
+      }
       calculator.input(operator);
       if (isEnter(operator)) {
         $total.innerHTML = `${calculator.result}` ?? "";
       } else {
         $total.innerHTML = resultTextForScreen(calculator);
       }
-    } catch (e) {
-      console.error(e);
+    } catch (e: any) {
+      handleError(e);
     }
   });
 });
