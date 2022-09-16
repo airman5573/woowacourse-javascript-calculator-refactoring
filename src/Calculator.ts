@@ -1,3 +1,4 @@
+import { ERROR_MESSAGES } from "./constants";
 import arrayToNumber from "./utils/arrayToNumber";
 import numberToArray from "./utils/numberToArray";
 
@@ -34,7 +35,7 @@ export const multiply = (a: number, b: number): number => {
 };
 export const divide = (a: number, b: number): number => {
   if (b === 0) {
-    throw new Error("0으로 나눌 수 없습니다!");
+    throw new Error(ERROR_MESSAGES.DIVIDE_BY_ZERO);
   }
   return Math.floor(a / b);
 };
@@ -56,13 +57,13 @@ class Calculator {
 
   compute() {
     if (this.operator === null) {
-      throw new Error("Operator가 null입니다");
+      throw new Error(ERROR_MESSAGES.OPERATOR_IS_EMPTY);
     }
     if (this.left.length === 0) {
-      throw new Error("왼쪽 피연산자가 없습니다");
+      throw new Error(ERROR_MESSAGES.LEFT_OPERAND_IS_EMPTY);
     }
     if (this.right.length === 0) {
-      throw new Error("오른쪽 피연산자가 없습니다");
+      throw new Error(ERROR_MESSAGES.RIGHT_OPERAND_IS_EMPTY);
     }
 
     const leftNum = arrayToNumber(this.left);
@@ -89,13 +90,11 @@ class Calculator {
   input(val: ValueType) {
     // error handling
     if (!isOperator(val) && !isOperand(val) && !isEnter(val)) {
-      throw new Error(
-        "연산자도 아니고 피연산자도 아니고 Enter도 아닙니다. 입력값을 다시 확인해 주세요."
-      );
+      throw new Error(ERROR_MESSAGES.ALL_INPUT_VALUES_ARE_INVALID);
     }
 
     if (this.operator !== null && isOperator(val)) {
-      throw new Error("연산자를 연속으로 입력할 수 없습니다");
+      throw new Error(ERROR_MESSAGES.OPERATOR_IS_CONSECUTIVE);
     }
 
     if (
@@ -104,15 +103,15 @@ class Calculator {
         this.operator === null ||
         this.right.length === 0)
     ) {
-      throw new Error("연산에 필요한 요소가 부족합니다");
+      throw new Error(ERROR_MESSAGES.INSUFFICIENT_INPUT_VALUE_FOR_OPERATION);
     }
 
     if (this.result === null && this.left.length === 0 && isOperator(val)) {
-      throw new Error("피연산자를 먼저 입력해 주세요");
+      throw new Error(ERROR_MESSAGES.LEFT_OPERAND_IS_EMPTY);
     }
 
     if (isOperand(val) && this.left.length > 2 && this.operator === null) {
-      throw new Error("세자리 까지만 입력 가능합니다");
+      throw new Error(ERROR_MESSAGES.OPERAND_OVER_MAX_DIGITS);
     }
 
     if (
@@ -121,7 +120,7 @@ class Calculator {
       this.operator !== null &&
       this.right.length > 2
     ) {
-      throw new Error("세자리 까지만 입력 가능합니다");
+      throw new Error(ERROR_MESSAGES.OPERAND_OVER_MAX_DIGITS);
     }
 
     // normal process
@@ -171,8 +170,6 @@ class Calculator {
       this.operator = val;
       return;
     }
-
-    throw new Error("어떤 경우에도 해당되지 않는 입력입니다");
   }
 
   clearFormula() {
