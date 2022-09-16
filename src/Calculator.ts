@@ -140,16 +140,15 @@ class Calculator {
       return;
     }
 
-    // 피연산자를 입력하는 경우, 왼쪽이 다 찼고 연산자도 입력되어 있다면 오른쪽에 넣는다
-    // TODO: 연산자를 입력하는 로직을 이 다음에 바로 넣는다
-    if (isOperand(val) && this.operator !== null && this.left.length > 0) {
-      this.right.push(val);
-      return;
-    }
-
     // 연산자를 입력하는 경우 왼쪽이 다 찼고 오른쪽이 비어있다면 연산자를 입력한다
     if (isOperator(val) && this.left.length > 0 && this.right.length === 0) {
       this.operator = val;
+      return;
+    }
+
+    // 피연산자를 입력하는 경우, 왼쪽이 다 찼고 연산자도 입력되어 있다면 오른쪽에 넣는다
+    if (isOperand(val) && this.operator !== null && this.left.length > 0) {
+      this.right.push(val);
       return;
     }
 
