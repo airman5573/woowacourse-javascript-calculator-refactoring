@@ -163,13 +163,12 @@ class Calculator {
 
     // 이전에 계산된 결과가 있고, 왼쪽 피연산자, 연산자, 오른쪽 피연산자가 비어있는경우
     // 왼쪽에 피연산자를 넣고 결과는 비운다
-    // TODO: isOperand를 더 앞쪽에 놓는다
     if (
       this.result !== null &&
+      isOperand(val) &&
       this.left.length === 0 &&
       this.operator === null &&
-      this.right.length === 0 &&
-      isOperand(val)
+      this.right.length === 0
     ) {
       this.left.push(val);
       this.result = null;
@@ -178,21 +177,18 @@ class Calculator {
 
     // 이전에 계산된 결과가 있고, 왼쪽 피연산자, 연산자, 오른쪽 피연산자가 비어있는 경우
     // 연산자를 입력한다
-    // TODO: isOperator를 더 앞쪽에 놓는다
     if (
       this.result !== null &&
+      isOperator(val) &&
       this.left.length === 0 &&
       this.operator === null &&
-      this.right.length === 0 &&
-      isOperator(val)
+      this.right.length === 0
     ) {
       this.left = numberToArray(this.result);
       this.result = null;
       this.operator = val;
       return;
     }
-
-    // TODO: 오른쪽 연산자를 입력하는 케이스를 추가한다
   }
 
   clearFormula() {
