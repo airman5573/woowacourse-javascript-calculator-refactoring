@@ -88,7 +88,6 @@ class Calculator {
   }
 
   input(val: ValueType) {
-    // error handling
     // 연속적으로 +를 입력한 경우
     if (this.operator !== null && isOperator(val)) {
       throw new Error(ERROR_MESSAGES.OPERATOR_IS_CONSECUTIVE);
@@ -119,7 +118,7 @@ class Calculator {
     // 피연산자를 입력 하려 하는데, 왼쪽 연산자가 이미 최대 값을 넘었다면 에러를 뿜는다
     if (
       isOperand(val) &&
-      this.left.length > MAX_DIGIT_SIZE && // TODO: === 으로 변경
+      this.left.length === MAX_DIGIT_SIZE &&
       this.operator === null
     ) {
       throw new Error(ERROR_MESSAGES.OPERAND_OVER_MAX_DIGITS);
@@ -130,7 +129,7 @@ class Calculator {
       isOperand(val) &&
       this.left.length > 0 &&
       this.operator !== null &&
-      this.right.length > MAX_DIGIT_SIZE // TODO: === 으로 변경
+      this.right.length === MAX_DIGIT_SIZE
     ) {
       throw new Error(ERROR_MESSAGES.OPERAND_OVER_MAX_DIGITS);
     }
