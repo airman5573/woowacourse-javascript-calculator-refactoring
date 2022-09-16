@@ -34,7 +34,7 @@
     "commitizen": "^4.2.4",
     "commitlint-config-gitmoji": "^2.2.5",
     "css-loader": "^6.7.1",
-    "cypress": "^10.7.0",
+    "cypress": "^10.8.0",
     "cz-customizable": "^6.3.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.0",
