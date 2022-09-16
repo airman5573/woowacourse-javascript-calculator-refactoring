@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES } from "./constants";
+import { ERROR_MESSAGES, MAX_DIGIT_SIZE } from "./constants";
 import arrayToNumber from "./utils/arrayToNumber";
 import numberToArray from "./utils/numberToArray";
 
@@ -105,19 +105,23 @@ class Calculator {
       throw new Error(ERROR_MESSAGES.RIGHT_OPERAND_IS_EMPTY);
     }
 
-    if (isOperand(val) && this.left.length > 2 && this.operator === null) {
-      throw new Error(ERROR_MESSAGES.OPERAND_OVER_MAX_DIGITS);
-    }
-
     if (this.result === null && this.left.length === 0 && isOperator(val)) {
       throw new Error(ERROR_MESSAGES.LEFT_OPERAND_IS_EMPTY);
     }
 
     if (
       isOperand(val) &&
+      this.left.length > MAX_DIGIT_SIZE &&
+      this.operator === null
+    ) {
+      throw new Error(ERROR_MESSAGES.OPERAND_OVER_MAX_DIGITS);
+    }
+
+    if (
+      isOperand(val) &&
       this.left.length > 0 &&
       this.operator !== null &&
-      this.right.length > 2
+      this.right.length > MAX_DIGIT_SIZE
     ) {
       throw new Error(ERROR_MESSAGES.OPERAND_OVER_MAX_DIGITS);
     }
