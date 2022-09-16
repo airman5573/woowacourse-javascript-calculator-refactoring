@@ -1,11 +1,5 @@
 import "./css/index.css";
-import Calculator, {
-  divide,
-  isEnter,
-  isOperand,
-  isOperator,
-  Operand,
-} from "./Calculator";
+import Calculator, { isEnter, isOperand, isOperator } from "./Calculator";
 import { OPERATOR_SIGN } from "./constants";
 
 const resultTextForScreen = (calculator: Calculator) => {
