@@ -9,13 +9,11 @@ import Calculator, {
 import { OPERATOR_SIGN } from "./constants";
 
 const resultTextForScreen = (calculator: Calculator) => {
-  const result = [
-    calculator.left.join(""),
-    calculator.operator === null ? null : OPERATOR_SIGN[calculator.operator],
-    calculator.right.join(""),
-  ]
-    .filter((val) => !!val)
-    .join("");
+  const left = calculator.left.join("");
+  const operator =
+    calculator.operator === null ? null : OPERATOR_SIGN[calculator.operator];
+  const right = calculator.right.join("");
+  const result = [left, operator, right].filter((val) => !!val).join("");
   return result;
 };
 
