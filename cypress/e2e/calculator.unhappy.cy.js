@@ -50,15 +50,19 @@ describe("계산기 실패 케이스 테스트", () => {
     cy.get(testid`digit-1`).click();
     cy.get(testid`digit-2`).click();
     cy.get(testid`digit-3`).click();
+    cy.get(testid`digit-4`).click();
     cy.on("window:alert", (text) => {
-      expect(text).to.contains(ERROR_MESSAGES.OPERATOR_IS_EMPTY);
+      expect(text).to.contains(ERROR_MESSAGES.OPERAND_OVER_MAX_DIGITS);
     });
   });
 
   it("오른쪽 피연산자는 3자리를 넘어서는 안된다", () => {
     cy.get(testid`digit-1`).click();
+    cy.get(testid`plus`).click();
+    cy.get(testid`digit-1`).click();
     cy.get(testid`digit-2`).click();
     cy.get(testid`digit-3`).click();
+    cy.get(testid`digit-4`).click();
     cy.on("window:alert", (text) => {
       expect(text).to.contains(ERROR_MESSAGES.OPERATOR_IS_EMPTY);
     });
