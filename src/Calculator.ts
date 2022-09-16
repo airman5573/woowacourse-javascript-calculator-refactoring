@@ -97,13 +97,16 @@ class Calculator {
       throw new Error(ERROR_MESSAGES.OPERATOR_IS_CONSECUTIVE);
     }
 
-    if (
-      isEnter(val) &&
-      (this.left.length === 0 ||
-        this.operator === null ||
-        this.right.length === 0)
-    ) {
-      throw new Error(ERROR_MESSAGES.INSUFFICIENT_INPUT_VALUE_FOR_OPERATION);
+    if (isEnter(val) && this.left.length === 0) {
+      throw new Error(ERROR_MESSAGES.LEFT_OPERAND_IS_EMPTY);
+    }
+
+    if (isEnter(val) && this.operator === null) {
+      throw new Error(ERROR_MESSAGES.OPERATOR_IS_EMPTY);
+    }
+
+    if (isEnter(val) && this.right.length === 0) {
+      throw new Error(ERROR_MESSAGES.RIGHT_OPERAND_IS_EMPTY);
     }
 
     if (this.result === null && this.left.length === 0 && isOperator(val)) {
