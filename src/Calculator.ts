@@ -111,7 +111,7 @@ class Calculator {
     // 이전 결과값이 없고 왼쪽 피연산자도 없는데 연산자를 누른 경우
     // 이전 결과값이 없는지는 왜 체크하는가? => 이전 결과깂이 있는 경우에는 왼쪽 피연산자가 없어도,
     // 연산자를 누르면 결과값이 왼쪽 피연산자로 가도록 설정해 놨기 떄문
-    if (this.result === null && this.left.length === 0 && isOperator(val)) {
+    if (isOperator(val) && this.result === null && this.left.length === 0) {
       throw new Error(ERROR_MESSAGES.LEFT_OPERAND_IS_EMPTY);
     }
 
