@@ -89,66 +89,82 @@ class Calculator {
 
   input(val: ValueType) {
     // error handling
+    // 연속적으로 +를 입력한 경우
     if (this.operator !== null && isOperator(val)) {
       throw new Error(ERROR_MESSAGES.OPERATOR_IS_CONSECUTIVE);
     }
 
+    // enter를 눌렀는데 왼쪽 피연산자가 없는 경우
     if (isEnter(val) && this.left.length === 0) {
       throw new Error(ERROR_MESSAGES.LEFT_OPERAND_IS_EMPTY);
     }
 
+    // enter를 눌렀는데 연산자가 없는 경우
     if (isEnter(val) && this.operator === null) {
       throw new Error(ERROR_MESSAGES.OPERATOR_IS_EMPTY);
     }
 
+    // enter를 눌렀는데 오른쪽 피연산자가 없는 경우
     if (isEnter(val) && this.right.length === 0) {
       throw new Error(ERROR_MESSAGES.RIGHT_OPERAND_IS_EMPTY);
     }
 
+    // 이전 결과값이 없고 왼쪽 피연산자도 없는데 연산자를 누른 경우
+    // 이전 결과값이 없는지는 왜 체크하는가? => 이전 결과깂이 있는 경우에는 왼쪽 피연산자가 없어도,
+    // 연산자를 누르면 결과값이 왼쪽 피연산자로 가도록 설정해 놨기 떄문
     if (this.result === null && this.left.length === 0 && isOperator(val)) {
       throw new Error(ERROR_MESSAGES.LEFT_OPERAND_IS_EMPTY);
     }
 
+    // 피연산자를 입력 하려 하는데, 왼쪽 연산자가 이미 최대 값을 넘었다면 에러를 뿜는다
     if (
       isOperand(val) &&
-      this.left.length > MAX_DIGIT_SIZE &&
+      this.left.length > MAX_DIGIT_SIZE && // TODO: === 으로 변경
       this.operator === null
     ) {
       throw new Error(ERROR_MESSAGES.OPERAND_OVER_MAX_DIGITS);
     }
 
+    // 피연산자를 입력 하려 하는데, 오른쪽 연산자가 이미 최대 값을 넘었다면 에러를 뿜는다
     if (
       isOperand(val) &&
       this.left.length > 0 &&
       this.operator !== null &&
-      this.right.length > MAX_DIGIT_SIZE
+      this.right.length > MAX_DIGIT_SIZE // TODO: === 으로 변경
     ) {
       throw new Error(ERROR_MESSAGES.OPERAND_OVER_MAX_DIGITS);
     }
 
-    // normal process
+    // 피연산자를 입력하는 경우, 왼쪽에 넣는다
     if (isOperand(val) && this.operator === null && this.right.length === 0) {
       this.left.push(val);
       return;
     }
 
+    // 피연산자를 입력하는 경우, 왼쪽이 다 찼고 연산자도 입력되어 있다면 오른쪽에 넣는다
+    // TODO: 연산자를 입력하는 로직을 이 다음에 바로 넣는다
     if (isOperand(val) && this.operator !== null && this.left.length > 0) {
       this.right.push(val);
       return;
     }
 
+    // 연산자를 입력하는 경우 왼쪽이 다 찼고 오른쪽이 비어있다면 연산자를 입력한다
     if (isOperator(val) && this.left.length > 0 && this.right.length === 0) {
       this.operator = val;
       return;
     }
 
+    // Enter를 누른 경우 왼쪽 피연산자가 있고 연산자가 있고 오른쪽 피연산자가 있는 경우 계산을 한다
     if (isEnter(val) && this.left.length > 0 && this.right.length > 0) {
+      // TODO: 연산자가 있는지도 체크한다
       this.compute();
       this.clearFormula();
       return;
     }
 
-    // consecutive calculate process
+    // 이전에 계산된 결과가 있고, 왼쪽 피연산자, 연산자, 오른쪽 피연산자가 비어있는경우
+    // 왼쪽에 피연산자를 넣고 결과는 비운다
+    // TODO: isOperand를 더 앞쪽에 놓는다
     if (
       this.result !== null &&
       this.left.length === 0 &&
@@ -161,6 +177,9 @@ class Calculator {
       return;
     }
 
+    // 이전에 계산된 결과가 있고, 왼쪽 피연산자, 연산자, 오른쪽 피연산자가 비어있는 경우
+    // 연산자를 입력한다
+    // TODO: isOperator를 더 앞쪽에 놓는다
     if (
       this.result !== null &&
       this.left.length === 0 &&
@@ -173,6 +192,8 @@ class Calculator {
       this.operator = val;
       return;
     }
+
+    // TODO: 오른쪽 연산자를 입력하는 케이스를 추가한다
   }
 
   clearFormula() {
