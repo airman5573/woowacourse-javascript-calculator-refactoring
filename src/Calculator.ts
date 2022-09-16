@@ -89,10 +89,6 @@ class Calculator {
 
   input(val: ValueType) {
     // error handling
-    if (!isOperator(val) && !isOperand(val) && !isEnter(val)) {
-      throw new Error(ERROR_MESSAGES.ALL_INPUT_VALUES_ARE_INVALID);
-    }
-
     if (this.operator !== null && isOperator(val)) {
       throw new Error(ERROR_MESSAGES.OPERATOR_IS_CONSECUTIVE);
     }
@@ -109,12 +105,12 @@ class Calculator {
       throw new Error(ERROR_MESSAGES.RIGHT_OPERAND_IS_EMPTY);
     }
 
-    if (this.result === null && this.left.length === 0 && isOperator(val)) {
-      throw new Error(ERROR_MESSAGES.LEFT_OPERAND_IS_EMPTY);
-    }
-
     if (isOperand(val) && this.left.length > 2 && this.operator === null) {
       throw new Error(ERROR_MESSAGES.OPERAND_OVER_MAX_DIGITS);
+    }
+
+    if (this.result === null && this.left.length === 0 && isOperator(val)) {
+      throw new Error(ERROR_MESSAGES.LEFT_OPERAND_IS_EMPTY);
     }
 
     if (
