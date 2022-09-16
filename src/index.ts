@@ -23,14 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const calculator = new Calculator();
 
   const $app = document.querySelector("#app");
-  if (!$app) {
-    throw new Error("#app이 존재하지 않습니다");
-  }
-  const $total = $app.querySelector("#total");
-  const $digits = $app.querySelector(".digits");
+  const $total = $app?.querySelector("#total");
+  const $digits = $app?.querySelector(".digits");
+  const $modifier = $app?.querySelector(".modifier");
+  const $operations = $app?.querySelector(".operations");
 
-  if (!$total || !$digits) {
-    throw new Error("#total 혹은 #digits이 존재하지 않습니다");
+  if (!$app || !$total || !$digits || !$modifier || !$operations) {
+    throw new Error("계산기 UI가 존재하지 않습니다");
   }
 
   $digits.addEventListener("click", (e: Event) => {
@@ -51,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  const $modifier = $app.querySelector(".modifier");
   if (!$modifier) {
     throw new Error(".modifier 엘리먼트가 존재하지 않습니다");
   }
@@ -60,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
     $total.innerHTML = "0";
   });
 
-  const $operations = $app.querySelector(".operations");
   if (!$operations) {
     throw new Error(".operations 엘리먼트가 존재하지 않습니다");
   }
