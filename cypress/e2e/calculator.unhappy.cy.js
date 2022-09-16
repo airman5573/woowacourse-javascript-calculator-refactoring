@@ -64,7 +64,7 @@ describe("계산기 실패 케이스 테스트", () => {
     cy.get(testid`digit-3`).click();
     cy.get(testid`digit-4`).click();
     cy.on("window:alert", (text) => {
-      expect(text).to.contains(ERROR_MESSAGES.OPERATOR_IS_EMPTY);
+      expect(text).to.contains(ERROR_MESSAGES.OPERAND_OVER_MAX_DIGITS);
     });
   });
 
