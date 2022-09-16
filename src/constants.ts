@@ -5,8 +5,6 @@ export const OPERATOR_SIGN = {
   divide: "/",
 };
 
-export const INITIAL_NUMBER = 0;
-
 export const MAX_DIGIT_SIZE = 3;
 
 export const ERROR_MESSAGES = {
