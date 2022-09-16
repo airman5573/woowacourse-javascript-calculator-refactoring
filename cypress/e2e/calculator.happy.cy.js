@@ -1,6 +1,6 @@
 import testid from "../support/index.js";
 
-describe("구현 결과가 요구사항과 일치해야 한다.", () => {
+describe("계산기 성공 케이스 테스트", () => {
   beforeEach(() => {
     cy.visit("/");
   });
@@ -65,11 +65,10 @@ describe("구현 결과가 요구사항과 일치해야 한다.", () => {
     cy.get(testid`total`).should("have.text", "3");
   });
 
-  it("최대 3개의 숫자만 입력 가능하다", () => {
+  it("3자리 숫자 입력 가능하다", () => {
     cy.get(testid`digit-1`).click();
     cy.get(testid`digit-2`).click();
     cy.get(testid`digit-3`).click();
-    cy.get(testid`digit-4`).click();
 
     cy.get(testid`total`).should("have.text", "123");
   });
